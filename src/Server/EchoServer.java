@@ -15,6 +15,7 @@ public class EchoServer {
 
         Socket socket = server.accept();
         System.out.println("Client conected");
+        System.out.println("Client conected");
 
         InputStream is = socket.getInputStream();
         OutputStream os = socket.getOutputStream();

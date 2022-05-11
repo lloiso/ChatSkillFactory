@@ -15,6 +15,7 @@ import javax.swing.JTextArea;
 
 public class NetClient extends JFrame implements KeyListener {
 
+
     final String serverIP = "127.0.0.1";
     final int serverPort = 8189;
 
@@ -66,7 +67,9 @@ public class NetClient extends JFrame implements KeyListener {
                         return;
                     }
                 }
-            };
+            }
+
+            ;
         }.start();
 
     }
@@ -76,9 +79,12 @@ public class NetClient extends JFrame implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent arg0) {}
+    public void keyPressed(KeyEvent arg0) {
+    }
+
     @Override
-    public void keyReleased(KeyEvent arg0) {}
+    public void keyReleased(KeyEvent arg0) {
+    }
 
     @Override
     public void keyTyped(KeyEvent arg0) {
@@ -86,7 +92,7 @@ public class NetClient extends JFrame implements KeyListener {
         out.print(arg0.getKeyChar());
         out.flush();
 
-        System.out.print((int)(arg0.getKeyChar()));
+        System.out.print((int) (arg0.getKeyChar()));
         addCharToTextArea(arg0.getKeyChar());
     }
 
