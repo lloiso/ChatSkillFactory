@@ -5,28 +5,39 @@ import Client.Client;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ChatServer {
-    public static void main(String[] args) throws IOException {
-        ServerSocket server = new ServerSocket(8189);
+    ArrayList<Client> clients = new ArrayList<>();
+    ServerSocket serverSocket;
 
+    public ChatServer() throws IOException {
+        serverSocket = new ServerSocket(8189);
+    }
+
+    public void sendAll(String msg){
+        for (Client client : clients){
+            client.recieve(msg);
+        }
+    }
+
+    public void run(){
         while (true) {
             System.out.println("Waiting..");
 
-            Socket socket = server.accept();
-            System.out.println("Client conected");
-            Client client = new Client(socket);
-            Thread thread = new Thread();
-            thread.start();
+            try {
+                Socket socket = serverSocket.accept();
+                System.out.println("Client conected");
+                clients.add(new Client(socket,this));
+
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
         }
+    }
 
-
-//        InputStream is = socket.getInputStream();
-//        OutputStream os = socket.getOutputStream();
-
-//        Scanner in = new Scanner(is);
-//        PrintStream out = new PrintStream(os);
-//        out.println("Name?");
-//        out.println("hi "+ in.nextLine());
+    public static void main(String[] args) throws IOException {
+        new ChatServer().run();
     }
 }
